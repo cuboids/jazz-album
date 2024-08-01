@@ -1,3 +1,4 @@
-ytmusicapi
 Flask
+flask-cors
 gunicorn
+ytmusicapi
