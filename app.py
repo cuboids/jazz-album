@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template
 from flask_cors import CORS
-import jazz_album_of_the_day
+import ja
 
 
 app = Flask(__name__)
