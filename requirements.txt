@@ -2,4 +2,3 @@ Flask
 flask-cors
 gunicorn
 ytmusicapi
-jazz-album-of-the-day
