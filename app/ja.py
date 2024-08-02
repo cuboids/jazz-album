@@ -8,7 +8,7 @@ from ytmusicapi import YTMusic
 
 
 # This is where we will look for potential jazz albums of the day.
-URL = "https://www.allaboutjazz.com/reviews/"
+URL = 'https://www.allaboutjazz.com/reviews/'
 
 
 def get_yesterday_date() -> datetime.date:
@@ -35,7 +35,7 @@ def convert_datetime_to_formatted_date(date: datetime.date) -> str:
         A string representation of the date in the format: "Month day, year".
         The month is spelled out. For example, "March 21, 2023".
     """
-    return date.strftime("%B %-d, %Y")
+    return date.strftime('%B %-d, %Y')
 
 
 def find_highest_rated_album_and_artist_title(formatted_date: str) -> tuple:
@@ -51,18 +51,18 @@ def find_highest_rated_album_and_artist_title(formatted_date: str) -> tuple:
     response = requests.get(URL)
 
     if response.status_code == 200:
-        soup = BeautifulSoup(response.content, "html.parser")
-        reviews = soup.find_all("div", class_="row data-row")
+        soup = BeautifulSoup(response.content, 'html.parser')
+        reviews = soup.find_all('div', class_='row data-row')
 
         highest_rated_album = None
         highest_rated_artist = None
         highest_rating = 0
 
         for review in reviews:
-            date = review.find("span", class_="small").text.strip().split("\n")[-1].strip()
-            album = review.find("h4").text.strip()
-            artist = review.find("div", class_="data-row-content").contents[2].strip()
-            rating = int(len(review.find_all("b", class_="fa fa-star")))
+            date = review.find('span', class_='small').text.strip().split('\n')[-1].strip()
+            album = review.find('h4').text.strip()
+            artist = review.find('div', class_='data-row-content').contents[2].strip()
+            rating = int(len(review.find_all('b', class_='fa fa-star')))
 
             if date == formatted_date:
                 if rating > highest_rating:
@@ -73,9 +73,9 @@ def find_highest_rated_album_and_artist_title(formatted_date: str) -> tuple:
         if highest_rated_album and highest_rated_artist:
             return highest_rated_album, highest_rated_artist
         else:
-            print(f"Hmm... Today is an unlucky day, we didn't find any albums for {formatted_date}. :O")
+            print(f'Hmm... Today is an unlucky day, we didn't find any albums for {formatted_date}. :O')
     else:
-        print(f"Failed to fetch the reviews page. Status code: {response.status_code}")
+        print(f'Failed to fetch the reviews page. Status code: {response.status_code}')
 
 
 def find_youtube_music_playlist(album_and_artist: tuple) -> str:
@@ -96,7 +96,7 @@ def find_youtube_music_playlist(album_and_artist: tuple) -> str:
     album = yt_music.get_album(browse_id)
     audio_playlist_id = album['audioPlaylistId']
 
-    return f"https://www.youtube-nocookie.com/embed/videoseries?list={audio_playlist_id}"
+    return f'https://www.youtube-nocookie.com/embed/videoseries?list={audio_playlist_id}'
 
 
 def main() -> dict:
