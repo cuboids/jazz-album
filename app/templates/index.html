@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jazz Album of the Day</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico">
+    <style>
+        body {
+            background-image: url('https://www.pythonanywhere.com/user/cuboids/files/home/cuboids/mysite/images/DALL%C2%B7E%202023-04-01%2004.25.33%20-%20A%20cute%20colorful%20yellow-ish%20wallpaper%20with%20regularly%20spaced%20jazzy%20saxophone%20icons%20in%20an%20alternating%20pattern.png');
+            background-size: cover;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .message-box {
+        background-color: crimson;
+        color: white;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        text-align: center;
+        padding: 20px;
+        margin-bottom: 20px;
+        width: 60%; /* Decrease the width */
+        max-width: 600px; /* Add a max-width for larger screens */
+        min-height: 100px; /* Increase the height */
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: inline-block; /* Add display: inline-block */
+        position: relative;
+        left: 50%; /* Center the box horizontally */
+        transform: translateX(-50%); /* Center the box horizontally */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 85px;
+            margin-top: 50px;
+            color: crimson; /* Make the header white */
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            color: red;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+            font-weight: normal;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin-top: -150px;
+        }
+
+        .footer {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: white;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 450px;
+        }
+
+        .youtube-iframe {
+            width: 100%;
+            height: 100%;
+            max-width: 1000px;
+            max-height: 600px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jazz Album of the Day</h1>
+    <h2 style="text-align: center; color: white;">{{ album }} - {{ artist }}</h2>
+    <div class="message-box">Little is more soothing than listening to one outstanding jazz album every day! That's why luminouscuboids proudly offers you the Jazz Album of the Day! Cozy up, press play, and let the fresh rhythms and melodies hug you in a loving embrace! :)</div>
+    <div class="container">
+    <iframe width="560" height="315" src="{{ youtube_url }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+</body>
+</html>
