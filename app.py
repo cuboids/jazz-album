@@ -1,20 +1,7 @@
 import os
-from flask import Flask, jsonify, render_template
-from flask_cors import CORS
-import ja
+from app import create_app
 
-app = Flask(__name__)
-CORS(app)  # Enable CORS for the Flask app
-
-@app.route('/', methods=['GET'])
-def get_jazz_album():
-    jaotd = ja.main()
-    return render_template(
-        'index.html',
-        youtube_url=jaotd['youtube_url'],
-        album=jaotd['album'],
-        artist=jaotd['artist']
-    )
+app = create_app()
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
