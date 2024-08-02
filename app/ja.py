@@ -73,7 +73,7 @@ def find_highest_rated_album_and_artist_title(formatted_date: str) -> tuple:
         if highest_rated_album and highest_rated_artist:
             return highest_rated_album, highest_rated_artist
         else:
-            print(f'Hmm... Today is an unlucky day, we didn't find any albums for {formatted_date}. :O')
+            print(f'Hmm... Today is an unlucky day, we didn\'t find any albums for {formatted_date}. :O')
     else:
         print(f'Failed to fetch the reviews page. Status code: {response.status_code}')
 
