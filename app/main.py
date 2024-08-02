@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, render_template
+
 import app.ja as ja
 
 bp = Blueprint('main', __name__)
