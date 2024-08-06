@@ -38,13 +38,12 @@ def convert_datetime_to_formatted_date(date: datetime.date) -> str:
     return date.strftime('%B %-d, %Y')
 
 
-def find_highest_rated_album_and_artist_title(formatted_date: str, excluded: str = '') -> tuple:
+def find_highest_rated_album_and_artist_title(formatted_date: str) -> tuple:
     """Scrape the All About Jazz Reviews front page to find the jazz album
     with the highest rating. :)
 
     Args:
         formatted_date: A string representation of the date in the format: "March 21, 2023".
-        excluded: Excluded album. This is useful if the album cannot be found on YouTube.
 
     Returns:
         A string containing the name of the album and the name of the artist.
@@ -65,7 +64,7 @@ def find_highest_rated_album_and_artist_title(formatted_date: str, excluded: str
             artist = review.find('div', class_='data-row-content').contents[2].strip()
             rating = int(len(review.find_all('b', class_='fa fa-star')))
 
-            if date == formatted_date and album != excluded:
+            if date == formatted_date:
                 if rating > highest_rating:
                     highest_rated_album = album
                     highest_rated_artist = artist
@@ -95,6 +94,7 @@ def find_youtube_music_playlist(album_and_artist: tuple):
     try:
         browse_id = yt_music.search(query=query, filter='albums')[0]['browseId']
     except IndexError:
+        # The album of the day will not always be on YouTube. That's unfortunate but fine.
         return None
     album = yt_music.get_album(browse_id)
     audio_playlist_id = album['audioPlaylistId']
@@ -108,15 +108,8 @@ def main() -> dict:
 
     yesterday = get_yesterday_date()
     yesterday_formatted = convert_datetime_to_formatted_date(yesterday)
-    
-    album_and_artist = find_highest_rated_album_and_artist_title(
-        yesterday_formatted)
-    backup = find_highest_rated_album_and_artist_title(
-        yesterday_formatted, excluded=album_and_artist[0])
-    
+    album_and_artist = find_highest_rated_album_and_artist_title(yesterday_formatted)
     url = find_youtube_music_playlist(album_and_artist)
-    if url is None:
-        url = find_youtube_music_playlist(backup)
 
     return {
         'youtube_url': url,
